@@ -1,59 +1,51 @@
-﻿using DesafioFundamentos.Models;
+﻿using System.Reflection;
+using System.Runtime.InteropServices;
+using DesafioFundamentos.Models;
 
-// Coloca o encoding para UTF8 para exibir acentuação
+//exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
+Console.WriteLine("Bem-vindo(a) ao sistema de estacionamento particular.\n"+
+          "Digite o preço inicial: ");
 precoInicial = Convert.ToDecimal(Console.ReadLine());
 
-Console.WriteLine("Agora digite o preço por hora:");
+Console.WriteLine("Digite o preço por hora: ");
 precoPorHora = Convert.ToDecimal(Console.ReadLine());
 
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
+
+Estacionamento estacionar = new Estacionamento(precoInicial, precoPorHora);
 
 string opcao = string.Empty;
 bool exibirMenu = true;
 
-// Realiza o loop do menu
-while (exibirMenu)
-{
-    Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
-    Console.WriteLine("4 - Encerrar");
+while(exibirMenu){
+    Console.WriteLine("Digite a opção desejada.\n"+
+                      "1 - Adicionar veículo.\n"+
+                      "2 - Listar veículos.\n"+
+                      "3 - Remover veículo.\n"+
+                      "4 - Encerrar.\n");
 
-    switch (Console.ReadLine())
-    {
+    switch(Console.ReadLine()){
         case "1":
-            es.AdicionarVeiculo();
+            estacionar.AdicionarVeiculo();
             break;
-
         case "2":
-            es.RemoverVeiculo();
+            estacionar.ListarVeiculos();
             break;
-
         case "3":
-            es.ListarVeiculos();
+            estacionar.RemoverVeiculo();
             break;
-
         case "4":
             exibirMenu = false;
             break;
-
         default:
-            Console.WriteLine("Opção inválida");
-            break;
+        Console.WriteLine("Opção inválida.");
+        break;
     }
-
-    Console.WriteLine("Pressione uma tecla para continuar");
+    Console.WriteLine("Aperte enter para continuar.");
     Console.ReadLine();
 }
-
-Console.WriteLine("O programa se encerrou");
+Console.WriteLine("Programa encerrado.");
